@@ -7,7 +7,6 @@ import com.reza.appmovies.data.models.BodyRegister
 import com.reza.appmovies.data.models.ResponseRegister
 import com.reza.appmovies.data.repository.RegisterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
