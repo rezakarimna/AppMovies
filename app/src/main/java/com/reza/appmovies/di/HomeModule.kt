@@ -1,5 +1,6 @@
 package com.reza.appmovies.di
 
+import com.reza.appmovies.data.api.ApiService
 import com.reza.appmovies.data.repository.HomeRepository
 import com.reza.appmovies.data.repository.HomeRepositoryImpl
 import com.reza.appmovies.data.repository.datasource.HomeDataSource
@@ -9,17 +10,18 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(FragmentComponent::class)
-abstract class HomeModule {
+class HomeModule {
 
-    @Binds
-    abstract fun bindHomeRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
+    @Provides
+    fun provideHomeRepository(homeRemoteDataSource: HomeDataSource): HomeRepository =
+        HomeRepositoryImpl(homeRemoteDataSource)
 
-    @Binds
-    abstract fun bindHomeDataSource(homeRemoteDataSource: HomeRemoteDataSource): HomeDataSource
-
-
+    @Provides
+    fun provideHomeDataSource(apiService: ApiService): HomeDataSource =
+        HomeRemoteDataSource(apiService)
 }

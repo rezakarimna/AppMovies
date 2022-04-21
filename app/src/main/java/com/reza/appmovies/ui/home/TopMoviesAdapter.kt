@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.reza.appmovies.data.models.home.ResponseMoviesList.*
+import com.reza.appmovies.data.models.home.ResponseMoviesList.Data
 import com.reza.appmovies.databinding.ItemHomeMoviesTopBinding
 import javax.inject.Inject
 

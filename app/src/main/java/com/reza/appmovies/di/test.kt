@@ -1,10 +1,11 @@
-package com.appexample
+package com.reza.appmovies.di
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+/*
 
 interface textInterface {
     fun getReminderList(reminderTable: String): String
@@ -26,4 +27,4 @@ class viewmode @Inject constructor(val repo: textInterface) : ViewModel() {
     val loading = MutableLiveData<Boolean>()
 
 
-}
+}*/
