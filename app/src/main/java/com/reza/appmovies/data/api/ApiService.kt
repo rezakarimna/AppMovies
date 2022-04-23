@@ -1,5 +1,6 @@
 package com.reza.appmovies.data.api
 
+import academy.nouri.s1_project.models.home.ResponseGenresList
 import com.reza.appmovies.data.models.BodyRegister
 import com.reza.appmovies.data.models.ResponseRegister
 import com.reza.appmovies.data.models.home.ResponseMoviesList
@@ -15,4 +16,10 @@ interface ApiService {
 
     @GET("genres/{genre_id}/movies")
     suspend fun moviesTopList(@Path("genre_id") id: Int): Response<ResponseMoviesList>
+
+    @GET("genres")
+    suspend fun genresList(): Response<ResponseGenresList>
+
+    @GET("movies")
+    suspend fun moviesLastList(): Response<ResponseMoviesList>
 }

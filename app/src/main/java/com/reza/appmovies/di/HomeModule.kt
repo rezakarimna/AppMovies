@@ -5,16 +5,15 @@ import com.reza.appmovies.data.repository.HomeRepository
 import com.reza.appmovies.data.repository.HomeRepositoryImpl
 import com.reza.appmovies.data.repository.datasource.HomeDataSource
 import com.reza.appmovies.data.repository.datasource.HomeRemoteDataSource
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
-@InstallIn(FragmentComponent::class)
+@InstallIn(ActivityRetainedComponent::class)
 class HomeModule {
 
     @Provides
