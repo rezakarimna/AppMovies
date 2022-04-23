@@ -1,14 +1,9 @@
 package com.reza.appmovies.di
 
 import com.reza.appmovies.data.api.ApiService
-import com.reza.appmovies.data.repository.HomeRepository
-import com.reza.appmovies.data.repository.HomeRepositoryImpl
-import com.reza.appmovies.data.repository.SearchRepository
-import com.reza.appmovies.data.repository.SearchRepositoryImpl
-import com.reza.appmovies.data.repository.source.HomeDataSource
-import com.reza.appmovies.data.repository.source.HomeRemoteDataSource
-import com.reza.appmovies.data.repository.source.SearchDataSource
-import com.reza.appmovies.data.repository.source.SearchRemoteDataSource
+import com.reza.appmovies.data.db.MoviesDao
+import com.reza.appmovies.data.repository.*
+import com.reza.appmovies.data.repository.source.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,4 +33,14 @@ object RepositoryModule {
     @Singleton
     fun provideSearchDataSource(apiService: ApiService): SearchDataSource =
         SearchRemoteDataSource(apiService)
+
+    @Provides
+    @Singleton
+    fun provideFavoriteRepository(favoriteLocalDataSource: FavoriteDataSource): FavoriteRepository =
+        FavoriteRepositoryImpl(favoriteLocalDataSource)
+
+    @Provides
+    @Singleton
+    fun provideFavoriteDataSource(dao: MoviesDao): FavoriteDataSource =
+        FavoriteLocalDataSource(dao)
 }
