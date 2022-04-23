@@ -5,10 +5,7 @@ import com.reza.appmovies.data.models.BodyRegister
 import com.reza.appmovies.data.models.ResponseRegister
 import com.reza.appmovies.data.models.home.ResponseMoviesList
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiService {
     @POST("register")
@@ -22,4 +19,7 @@ interface ApiService {
 
     @GET("movies")
     suspend fun moviesLastList(): Response<ResponseMoviesList>
+
+    @GET("movies")
+    suspend fun searchMovies(@Query("q") name:String): Response<ResponseMoviesList>
 }
