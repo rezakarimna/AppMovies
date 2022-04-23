@@ -1,4 +1,4 @@
-package com.reza.appmovies.data.repository.datasource
+package com.reza.appmovies.data.repository.source
 
 import com.reza.appmovies.data.api.ApiService
 import com.reza.appmovies.data.models.home.ResponseMoviesList

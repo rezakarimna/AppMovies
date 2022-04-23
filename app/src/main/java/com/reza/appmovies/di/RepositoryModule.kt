@@ -5,15 +5,13 @@ import com.reza.appmovies.data.repository.HomeRepository
 import com.reza.appmovies.data.repository.HomeRepositoryImpl
 import com.reza.appmovies.data.repository.SearchRepository
 import com.reza.appmovies.data.repository.SearchRepositoryImpl
-import com.reza.appmovies.data.repository.datasource.HomeDataSource
-import com.reza.appmovies.data.repository.datasource.HomeRemoteDataSource
-import com.reza.appmovies.data.repository.datasource.SearchDataSource
-import com.reza.appmovies.data.repository.datasource.SearchRemoteDataSource
+import com.reza.appmovies.data.repository.source.HomeDataSource
+import com.reza.appmovies.data.repository.source.HomeRemoteDataSource
+import com.reza.appmovies.data.repository.source.SearchDataSource
+import com.reza.appmovies.data.repository.source.SearchRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 

@@ -1,4 +1,4 @@
-package com.reza.appmovies.data.repository.datasource
+package com.reza.appmovies.data.repository.source
 
 import academy.nouri.s1_project.models.home.ResponseGenresList
 import com.reza.appmovies.data.models.home.ResponseMoviesList
