@@ -2,6 +2,7 @@ package com.reza.appmovies.data.api
 
 import academy.nouri.s1_project.models.home.ResponseGenresList
 import com.reza.appmovies.data.models.BodyRegister
+import com.reza.appmovies.data.models.ResponseDetail
 import com.reza.appmovies.data.models.ResponseRegister
 import com.reza.appmovies.data.models.home.ResponseMoviesList
 import retrofit2.Response
@@ -21,5 +22,8 @@ interface ApiService {
     suspend fun moviesLastList(): Response<ResponseMoviesList>
 
     @GET("movies")
-    suspend fun searchMovies(@Query("q") name:String): Response<ResponseMoviesList>
+    suspend fun searchMovies(@Query("q") name: String): Response<ResponseMoviesList>
+
+    @GET("movies/{movie_id}")
+    suspend fun detailMovie(@Path("movie_id") id: Int): Response<ResponseDetail>
 }
