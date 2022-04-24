@@ -36,20 +36,31 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //InitViews
-        binding.apply {
-            //Show all favorite
-            viewModel.loadFavoriteList()
-            //List
-            viewModel.favoriteList.observe(viewLifecycleOwner) {
-                favoriteAdapter.setData(it)
-                favoriteRecycler.initRecycler(
-                    LinearLayoutManager(requireContext()),
-                    favoriteAdapter
-                )
-            }
+        getAllFavoriteMovies()
+        observeListFavoriteMovies()
+        setFavoriteRecycler()
+        observeEmptyList()
+    }
 
-            //Empty
+    private fun getAllFavoriteMovies() {
+        viewModel.loadFavoriteList()
+    }
+
+    private fun observeListFavoriteMovies() {
+        viewModel.favoriteList.observe(viewLifecycleOwner) {
+            favoriteAdapter.setData(it)
+        }
+    }
+
+    private fun setFavoriteRecycler() {
+        binding.favoriteRecycler.initRecycler(
+            LinearLayoutManager(requireContext()),
+            favoriteAdapter
+        )
+    }
+
+    private fun observeEmptyList() {
+        binding.apply {
             viewModel.empty.observe(viewLifecycleOwner) {
                 if (it) {
                     emptyItemsLay.showInVisible(true)
@@ -60,5 +71,6 @@ class FavoriteFragment : Fragment() {
                 }
             }
         }
+
     }
 }
