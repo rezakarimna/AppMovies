@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reza.appmovies.R
 import com.reza.appmovies.databinding.FragmentSearchBinding
+import com.reza.appmovies.ui.home.HomeFragmentDirections
 import com.reza.appmovies.ui.home.LastMoviesAdapter
 import com.reza.appmovies.utils.initRecycler
 import com.reza.appmovies.utils.showInVisible
@@ -42,6 +44,7 @@ class SearchFragment : Fragment() {
         setRecyclerViewMovies()
         observeLoading()
         observeEmptyList()
+        moveToDetailFragment()
     }
 
     private fun searchMovies() {
@@ -90,5 +93,12 @@ class SearchFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun moveToDetailFragment() {
+        searchAdapter.setOnItemClickListener {
+            val directions = HomeFragmentDirections.actionToDetail(it.id!!.toInt())
+            findNavController().navigate(directions)
+        }
     }
 }

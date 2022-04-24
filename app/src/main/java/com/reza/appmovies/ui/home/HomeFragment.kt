@@ -1,17 +1,15 @@
 package com.reza.appmovies.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
-import com.reza.appmovies.R
 import com.reza.appmovies.databinding.FragmentHomeBinding
-import com.reza.appmovies.utils.Constants
 import com.reza.appmovies.utils.initRecycler
 import com.reza.appmovies.utils.showInVisible
 import com.reza.appmovies.viewmodel.HomeViewModel
@@ -67,6 +65,7 @@ class HomeFragment : Fragment() {
         setRecyclerViewLastMovies()
         //loading
         observeLoading()
+        moveToDetailFragment()
     }
 
     private fun observeTopMovieList() {
@@ -133,5 +132,11 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun moveToDetailFragment() {
+        lastMoviesAdapter.setOnItemClickListener {
+            val directions = HomeFragmentDirections.actionToDetail(it.id!!.toInt())
+            findNavController().navigate(directions)
+        }
+    }
 
 }

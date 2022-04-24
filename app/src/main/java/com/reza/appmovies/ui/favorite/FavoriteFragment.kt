@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reza.appmovies.R
 import com.reza.appmovies.databinding.FragmentFavoriteBinding
+import com.reza.appmovies.ui.home.HomeFragmentDirections
 import com.reza.appmovies.utils.initRecycler
 import com.reza.appmovies.utils.showInVisible
 import com.reza.appmovies.viewmodel.FavoriteViewModel
@@ -40,6 +42,7 @@ class FavoriteFragment : Fragment() {
         observeListFavoriteMovies()
         setFavoriteRecycler()
         observeEmptyList()
+        moveToDetailFragment()
     }
 
     private fun getAllFavoriteMovies() {
@@ -72,5 +75,12 @@ class FavoriteFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun moveToDetailFragment() {
+        favoriteAdapter.setOnItemClickListener {
+            val directions = HomeFragmentDirections.actionToDetail(it.id)
+            findNavController().navigate(directions)
+        }
     }
 }
