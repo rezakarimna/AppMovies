@@ -43,4 +43,17 @@ object RepositoryModule {
     @Singleton
     fun provideFavoriteDataSource(dao: MoviesDao): FavoriteDataSource =
         FavoriteLocalDataSource(dao)
+
+    @Provides
+    @Singleton
+    fun provideDetailMovieRepository(detailMovieDataSource: DetailMovieDataSource): DetailMovieRepository =
+        DetailMovieRepositoryImpl(detailMovieDataSource)
+
+    @Provides
+    @Singleton
+    fun provideDetailMovieDataSource(
+        apiService: ApiService,
+        dao: MoviesDao
+    ): DetailMovieDataSource =
+        DetailMovieDataSourceImpl(apiService, dao)
 }

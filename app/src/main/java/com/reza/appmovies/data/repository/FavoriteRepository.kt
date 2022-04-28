@@ -5,4 +5,5 @@ import com.reza.appmovies.data.db.MovieEntity
 
 interface FavoriteRepository {
     fun allFavoriteList(): MutableList<MovieEntity>
+
 }
