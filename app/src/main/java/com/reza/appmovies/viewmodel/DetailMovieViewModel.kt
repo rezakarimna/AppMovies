@@ -1,5 +1,6 @@
 package com.reza.appmovies.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,29 +16,38 @@ import javax.inject.Inject
 class DetailMovieViewModel @Inject constructor(private val repository: DetailMovieRepository) :
     ViewModel() {
     //Api
-    val detailMovie = MutableLiveData<ResponseDetail>()
-    val loading = MutableLiveData<Boolean>()
-
-    fun loadDetailMovie(id: Int) = viewModelScope.launch {
-        loading.postValue(true)
-        val response = repository.detailMovie(id)
-        if (response.isSuccessful) {
-            detailMovie.postValue(response.body())
-        }
-        loading.postValue(false)
-    }
+    private val _detailMovie = MutableLiveData<ResponseDetail>()
+    val detailMovie: LiveData<ResponseDetail>
+        get() = _detailMovie
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
 
     //Database
-    val isFavorite = MutableLiveData<Boolean>()
-    suspend fun existsMovie(id: Int) = withContext(viewModelScope.coroutineContext) { repository.existsMovie(id) }
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean>
+        get() = _isFavorite
+
+    fun loadDetailMovie(id: Int) = viewModelScope.launch {
+        _loading.postValue(true)
+        val response = repository.detailMovie(id)
+        if (response.isSuccessful) {
+            _detailMovie.postValue(response.body())
+        }
+        _loading.postValue(false)
+    }
+
+
+    suspend fun existsMovie(id: Int) =
+        withContext(viewModelScope.coroutineContext) { repository.existsMovie(id) }
 
     fun favoriteMovie(id: Int, entity: MovieEntity) = viewModelScope.launch {
         val exists = repository.existsMovie(id)
         if (exists) {
-            isFavorite.postValue(false)
+            _isFavorite.postValue(false)
             repository.deleteMovie(entity)
         } else {
-            isFavorite.postValue(true)
+            _isFavorite.postValue(true)
             repository.insertMovie(entity)
         }
     }
