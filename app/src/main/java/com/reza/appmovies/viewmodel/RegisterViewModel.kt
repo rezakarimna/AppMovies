@@ -1,5 +1,6 @@
 package com.reza.appmovies.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,16 +15,21 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(private val registerRepository: RegisterRepository) :
     ViewModel() {
 
-    val registerUser = MutableLiveData<ResponseRegister>()
-    val loading = MutableLiveData<Boolean>()
+    private val _registerUser = MutableLiveData<ResponseRegister>()
+    val registerUser: LiveData<ResponseRegister>
+        get() = _registerUser
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
 
     fun sendRegisterUser(bodyRegister: BodyRegister) = viewModelScope.launch {
-        loading.postValue(true)
+        _loading.postValue(true)
         val response = registerRepository.registerUser(bodyRegister)
         if (response.isSuccessful) {
-            registerUser.postValue(response.body())
+            _registerUser.postValue(response.body())
         }
-        loading.postValue(false)
+        _loading.postValue(false)
 
     }
 }
