@@ -46,14 +46,17 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideDetailMovieRepository(detailMovieDataSource: DetailMovieDataSource): DetailMovieRepository =
-        DetailMovieRepositoryImpl(detailMovieDataSource)
+    fun provideDetailMovieRepository(detailMovieDataSource: DetailMovieDataSource , localDataSource: DetailMovieLocalDataSource): DetailMovieRepository =
+        DetailMovieRepositoryImpl(detailMovieDataSource , localDataSource)
 
     @Provides
     @Singleton
-    fun provideDetailMovieDataSource(
-        apiService: ApiService,
-        dao: MoviesDao
-    ): DetailMovieDataSource =
-        DetailMovieDataSourceImpl(apiService, dao)
+    fun provideDetailMovieLocalDataSource(dao: MoviesDao) =
+        DetailMovieLocalDataSource(dao)
+
+    @Provides
+    @Singleton
+    fun provideDetailMovieRemoteDataSource(apiService: ApiService): DetailMovieDataSource =
+        DetailMovieRemoteDataSource(apiService)
 }
+

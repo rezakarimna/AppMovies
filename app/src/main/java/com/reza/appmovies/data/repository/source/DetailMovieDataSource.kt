@@ -5,6 +5,7 @@ import com.reza.appmovies.data.models.ResponseDetail
 import retrofit2.Response
 
 interface DetailMovieDataSource {
+    //api
     suspend fun detailMovie(id:Int): Response<ResponseDetail>
     //Database
     suspend fun insertMovie(entity: MovieEntity)

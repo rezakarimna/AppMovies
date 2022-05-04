@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onNavigateUp(): Boolean {
+    /*override fun onNavigateUp(): Boolean {
         return navController.navigateUp() || super.onNavigateUp()
-    }
+    }*/
 }

@@ -32,6 +32,7 @@
             style="@style/TextViewLightStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:textSize="@dimen/_14font_mdp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -51,6 +52,7 @@
             android:id="@+id/emailEdt"
             style="@style/TextViewLightStyle"
             android:layout_width="match_parent"
+            android:maxLines="1"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_14font_mdp" />
 
@@ -64,6 +66,7 @@
         android:layout_marginHorizontal="@dimen/_30mdp"
         android:layout_marginTop="@dimen/_20mdp"
         android:hint="@string/password"
+        android:maxLines="1"
         app:layout_constraintTop_toBottomOf="@id/emailInput"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/philippineSilver"
