@@ -1,5 +1,6 @@
 package com.reza.appmovies.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,22 +13,30 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(private val repository: SearchRepository) :
     ViewModel() {
-    val moviesList = MutableLiveData<ResponseMoviesList>()
-    val loading = MutableLiveData<Boolean>()
-    val empty = MutableLiveData<Boolean>()
+    private val _moviesList = MutableLiveData<ResponseMoviesList>()
+    val moviesList: LiveData<ResponseMoviesList>
+        get() = _moviesList
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
+
+    private val _empty = MutableLiveData<Boolean>()
+    val empty: LiveData<Boolean>
+        get() = _empty
 
     fun loadSearchMovies(name: String) = viewModelScope.launch {
-        loading.postValue(true)
+        _loading.postValue(true)
         val response = repository.searchMovies(name)
         if (response.isSuccessful) {
             if (response.body()?.data!!.isNotEmpty()) {
-                moviesList.postValue(response.body())
-                empty.postValue(false)
+                _moviesList.postValue(response.body())
+                _empty.postValue(false)
             } else {
-                empty.postValue(true)
+                _empty.postValue(true)
             }
         }
-        loading.postValue(false)
+        _loading.postValue(false)
     }
 
 }

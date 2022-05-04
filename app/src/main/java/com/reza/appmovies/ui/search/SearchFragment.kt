@@ -9,7 +9,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.reza.appmovies.R
 import com.reza.appmovies.databinding.FragmentSearchBinding
 import com.reza.appmovies.ui.home.HomeFragmentDirections
 import com.reza.appmovies.ui.home.LastMoviesAdapter
