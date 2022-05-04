@@ -2,6 +2,7 @@ package com.reza.appmovies.viewmodel
 
 import academy.nouri.s1_project.models.home.ResponseGenresList
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,15 +17,26 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repositoryImpl: HomeRepository) : ViewModel() {
 
-    var topMovesListLiveData = MutableLiveData<ResponseMoviesList>()
-    var lastMovesListLiveData = MutableLiveData<ResponseMoviesList>()
-    var genresListLiveData = MutableLiveData<ResponseGenresList>()
-    var loading = MutableLiveData<Boolean>()
+    private var _topMovesListLiveData = MutableLiveData<ResponseMoviesList>()
+    val topMovesListLiveData: LiveData<ResponseMoviesList>
+        get() = _topMovesListLiveData
+
+    private var _lastMovesListLiveData = MutableLiveData<ResponseMoviesList>()
+    val lastMovesListLiveData: LiveData<ResponseMoviesList>
+        get() = _lastMovesListLiveData
+
+    private var _genresListLiveData = MutableLiveData<ResponseGenresList>()
+    val genresListLiveData: LiveData<ResponseGenresList>
+        get() = _genresListLiveData
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
 
     fun loadTopMoviesList(id: Int) = viewModelScope.launch {
         val response = repositoryImpl.topMoviesList(id)
         if (response.isSuccessful) {
-            topMovesListLiveData.postValue(response.body())
+            _topMovesListLiveData.postValue(response.body())
         } else {
             Log.i(Constants.MOVIES_TABLE, "loadTopMoviesList: " + response.message())
         }
@@ -33,20 +45,20 @@ class HomeViewModel @Inject constructor(private val repositoryImpl: HomeReposito
     fun loadGenresList() = viewModelScope.launch {
         val response = repositoryImpl.genresList()
         if (response.isSuccessful) {
-            genresListLiveData.postValue(response.body())
+            _genresListLiveData.postValue(response.body())
         } else {
             Log.i(Constants.MOVIES_TABLE, "loadTopMoviesList: " + response.message())
         }
     }
 
     fun loadLastMoviesList() = viewModelScope.launch {
-        loading.postValue(true)
+        _loading.postValue(true)
         val response = repositoryImpl.moviesLastList()
         if (response.isSuccessful) {
-            lastMovesListLiveData.postValue(response.body())
+            _lastMovesListLiveData.postValue(response.body())
         } else {
             Log.i(Constants.MOVIES_TABLE, "loadTopMoviesList: " + response.message())
         }
-        loading.postValue(false)
+        _loading.postValue(false)
     }
 }
